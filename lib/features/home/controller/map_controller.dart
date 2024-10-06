@@ -1,9 +1,5 @@
-import 'dart:ffi';
-
 import 'package:domi_labs/features/home/application/location_service.dart';
-import 'package:domi_labs/features/home/controller/state/map_screen_state.dart';
 import 'package:domi_labs/features/home/data/map_repository.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -31,5 +27,3 @@ class MapScreenController extends _$MapScreenController {
     return await locationService.userLocation();
   }
 }
-
-

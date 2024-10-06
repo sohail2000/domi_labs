@@ -8,7 +8,7 @@ class ApiEndpoint {
   static String getBuildingOutlineUrl(LatLng latLng) {
     return '''https://overpass-api.de/api/interpreter?data=[out:json];
   (
-    way["building"](around:10,${latLng.latitude},${latLng.longitude});
+    way["building"](around:20,${latLng.latitude},${latLng.longitude});
   );
   out body;
   node(w); // Fetch node details

@@ -1,5 +1,5 @@
 import 'package:domi_labs/features/home/presentation/map_screen_osm.dart';
-import 'package:domi_labs/features/home/presentation/pdf_preview_screen.dart';
+import 'package:domi_labs/features/home/presentation/pdf_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

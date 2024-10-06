@@ -53,11 +53,9 @@ class MapTopBar extends StatelessWidget {
                       ),
                       const SizedBox(width: 10),
                       Flexible(
-                        child: Text(
-                          address,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTextStyle.whiteRegular12
-                        ),
+                        child: Text(address,
+                            overflow: TextOverflow.ellipsis,
+                            style: AppTextStyle.whiteRegular12),
                       ),
                     ],
                   ),

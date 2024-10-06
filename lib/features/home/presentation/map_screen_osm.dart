@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:domi_labs/features/home/controller/map_controller.dart';
-import 'package:domi_labs/features/home/presentation/bottom_sheet.dart';
-import 'package:domi_labs/features/home/presentation/custom_marker.dart';
+import 'package:domi_labs/features/home/presentation/map_bottom_sheet.dart';
+import 'package:domi_labs/utilities/custom_marker.dart';
 import 'package:domi_labs/features/home/presentation/inivite_dialog_box.dart';
 import 'package:domi_labs/features/home/presentation/map_topbar.dart';
 import 'package:domi_labs/utilities/api_endpoint.dart';
@@ -47,6 +47,9 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
   }
 
   Future<void> _handleTap(LatLng latLng) async {
+    final selectedLocAddress = await ref
+        .read(mapScreenControllerProvider.notifier)
+        .addressFromLatlong(latLng);
     List<LatLng> buildingPolygon = await ref
         .read(mapScreenControllerProvider.notifier)
         .bulidingOutline(latLng);
@@ -69,7 +72,9 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
     showDialog(
       context: context,
       builder: (context) {
-        return const InviteDialogBox();
+        return InviteDialogBox(
+          inviteAddress: selectedLocAddress,
+        );
       },
     ).then((value) {
       _isInviteDialogOpen = false;

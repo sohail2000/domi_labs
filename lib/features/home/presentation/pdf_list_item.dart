@@ -15,7 +15,7 @@ class PDFListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.go(AppRoutes.pdfView, extra: pdfData.file),
+      onTap: () => context.push(AppRoutes.pdfView, extra: pdfData.file),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         padding: const EdgeInsets.all(12.0),

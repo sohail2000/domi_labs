@@ -1,11 +1,50 @@
+import 'package:domi_labs/features/home/domain/pdf_file.dart';
 import 'package:domi_labs/features/home/presentation/pdf_list_item.dart';
 import 'package:domi_labs/styling/app_colors.dart';
 import 'package:domi_labs/styling/app_text_styles.dart';
 import 'package:domi_labs/utilities/pdf_data.dart';
 import 'package:flutter/material.dart';
 
-class MapBottomSheet extends StatelessWidget {
+class MapBottomSheet extends StatefulWidget {
   const MapBottomSheet({super.key});
+
+  @override
+  State<MapBottomSheet> createState() => _MapBottomSheetState();
+}
+
+class _MapBottomSheetState extends State<MapBottomSheet> {
+  final TextEditingController _searchController = TextEditingController();
+  List<PdfData> _orderedPdfFileList = [];
+
+    @override
+  void initState() {
+    super.initState();
+    _orderedPdfFileList = pdfFileList;
+    _searchController.addListener(_reorderPdfList);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_reorderPdfList);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+    void _reorderPdfList() {
+    setState(() {
+      final query = _searchController.text.toLowerCase();
+
+      _orderedPdfFileList = List.from(pdfFileList)
+        ..sort((a, b) {
+          final aContains = a.name.toLowerCase().contains(query) || a.date.toLowerCase().contains(query);
+          final bContains = b.name.toLowerCase().contains(query) || b.date.toLowerCase().contains(query);
+
+          if (aContains && !bContains) return -1;
+          if (!aContains && bContains) return 1;
+          return 0;
+        });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,13 +152,12 @@ class MapBottomSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         TextField(
+                          controller: _searchController,
                           style: AppTextStyle.whiteRegular12,
                           decoration: InputDecoration(
-                            prefixIcon:
-                                const Icon(Icons.search, color: Colors.white70),
+                            // prefixIcon: const Icon(Icons.search, color: Colors.white70),
                             hintText: 'Search docs',
-                            hintStyle: AppTextStyle.whiteMedium16
-                                .copyWith(color: Colors.white70),
+                            hintStyle: AppTextStyle.whiteMedium16.copyWith(color: Colors.white70),
                             filled: true,
                             fillColor: Colors.grey[800],
                             border: OutlineInputBorder(
@@ -131,12 +169,10 @@ class MapBottomSheet extends StatelessWidget {
                         ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: pdfFileList.length,
+                          itemCount: _orderedPdfFileList.length,
                           itemBuilder: (context, index) {
-                            final pdf = pdfFileList[index];
-                            return PDFListItem(
-                              pdfData: pdf
-                            );
+                            final pdf = _orderedPdfFileList[index];
+                            return PDFListItem(pdfData: pdf);
                           },
                         ),
                       ],
@@ -151,4 +187,3 @@ class MapBottomSheet extends StatelessWidget {
     );
   }
 }
-
