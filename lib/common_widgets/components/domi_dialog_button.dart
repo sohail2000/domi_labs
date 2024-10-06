@@ -21,7 +21,7 @@ class DomiDialogButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               backgroundColor: AppColor.white,
-              foregroundColor: Colors.white),
+              foregroundColor: AppColor.white),
           onPressed: onPressed,
           child: const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),

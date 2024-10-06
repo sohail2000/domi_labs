@@ -67,8 +67,8 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
       _polygons.add(
         Polygon(
           points: buildingPolygon,
-          color: Colors.yellow.withOpacity(0.3),
-          borderColor: Colors.yellow,
+          color: AppColor.yellow.withOpacity(0.3),
+          borderColor: AppColor.yellow,
           borderStrokeWidth: 3,
         ),
       );
@@ -122,13 +122,10 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
                     _currentAddress.isEmpty ? "Loading..." : _currentAddress),
           ),
           _showInviteDialog
-              ? Container(
-                  color: AppColor.blue.withOpacity(0.2),
-                  child: InviteDialogBox(
-                    inviteAddress: _inviteAddress,
-                    removeDialog: () => removeInviteDialog(),
-                  ),
-                )
+              ? InviteDialogBox(
+                inviteAddress: _inviteAddress,
+                removeDialog: () => removeInviteDialog(),
+              )
               : const MapBottomSheet(),
         ],
       ),

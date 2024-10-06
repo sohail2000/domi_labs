@@ -59,7 +59,7 @@ class _MapBottomSheetState extends State<MapBottomSheet> {
           child: Container(
             padding: const EdgeInsets.only(top: 10),
             decoration: const BoxDecoration(
-              color: Colors.black,
+              color: AppColor.black,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -95,7 +95,7 @@ class _MapBottomSheetState extends State<MapBottomSheet> {
                               style: AppTextStyle.whiteBold16,
                             ),
                             Icon(Icons.arrow_forward_ios_rounded,
-                                size: 10, color: Colors.white),
+                                size: 10, color: AppColor.white),
                           ],
                         ),
                         const SizedBox(height: 10),
@@ -147,7 +147,7 @@ class _MapBottomSheetState extends State<MapBottomSheet> {
                               style: AppTextStyle.whiteBold16,
                             ),
                             Icon(Icons.arrow_forward_ios_rounded,
-                                size: 10, color: Colors.white),
+                                size: 10, color: AppColor.white),
                           ],
                         ),
                         const SizedBox(height: 10),
@@ -155,7 +155,7 @@ class _MapBottomSheetState extends State<MapBottomSheet> {
                           controller: _searchController,
                           style: AppTextStyle.whiteRegular12,
                           decoration: InputDecoration(
-                            // prefixIcon: const Icon(Icons.search, color: Colors.white70),
+                            prefixIcon: const Icon(Icons.search, color: Colors.white70),
                             hintText: 'Search docs',
                             hintStyle: AppTextStyle.whiteMedium16.copyWith(color: Colors.white70),
                             filled: true,

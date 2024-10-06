@@ -1,3 +1,4 @@
+import 'package:domi_labs/styling/app_colors.dart';
 import 'package:domi_labs/styling/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MapTopBar extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 24,
-              backgroundColor: Colors.black,
+              backgroundColor: AppColor.black,
               child: Image.asset(
                 'assets/icons/person_white.png',
                 fit: BoxFit.fill,
@@ -29,7 +30,7 @@ class MapTopBar extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: Colors.black,
+                  color: AppColor.black,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 0),
@@ -40,7 +41,7 @@ class MapTopBar extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: CircleAvatar(
-                          backgroundColor: Colors.black,
+                          backgroundColor: AppColor.black,
                           child: ClipOval(
                             child: Image.asset(
                               'assets/images/car03.png',
@@ -65,7 +66,7 @@ class MapTopBar extends StatelessWidget {
             const SizedBox(width: 10),
             CircleAvatar(
                 radius: 24,
-                backgroundColor: Colors.black,
+                backgroundColor: AppColor.black,
                 child: Image.asset('assets/icons/white_chat_bubble.png'))
           ],
         ),

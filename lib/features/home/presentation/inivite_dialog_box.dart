@@ -2,7 +2,6 @@ import 'package:domi_labs/common_widgets/components/domi_dialog_button.dart';
 import 'package:domi_labs/styling/app_colors.dart';
 import 'package:domi_labs/styling/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 
 class InviteDialogBox extends StatelessWidget {
@@ -10,7 +9,6 @@ class InviteDialogBox extends StatelessWidget {
     super.key,
     required this.inviteAddress,
     required this.removeDialog,
-
   });
   final String inviteAddress;
   final Function removeDialog;
@@ -27,7 +25,7 @@ class InviteDialogBox extends StatelessWidget {
         child: Container(
           height: double.infinity,
           width: double.infinity,
-          color: Colors.transparent,
+          color: AppColor.blue.withOpacity(0.2),
         ),
       ),
       Align(

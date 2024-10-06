@@ -1,3 +1,4 @@
+import 'package:domi_labs/styling/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -12,7 +13,7 @@ Marker userLocationMarker(LatLng point) {
         const Icon(
           size: 60,
           Icons.location_history,
-          color: Colors.black,
+          color: AppColor.black,
         ),
         Positioned(
           top: 8,
@@ -42,7 +43,7 @@ Marker selectedLocationMarker(LatLng point) {
         const Icon(
           size: 60,
           Icons.location_history,
-          color: Colors.black,
+          color: AppColor.black,
         ),
         Positioned(
           top: 8,
