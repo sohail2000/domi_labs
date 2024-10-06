@@ -9,8 +9,11 @@ class InviteDialogBox extends StatelessWidget {
   const InviteDialogBox({
     super.key,
     required this.inviteAddress,
+    required this.removeDialog,
+
   });
   final String inviteAddress;
+  final Function removeDialog;
 
   Future<void> _sendInvite() async {
     await Share.share('Join us on this awesome app! $inviteAddress');
@@ -20,7 +23,7 @@ class InviteDialogBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       GestureDetector(
-        onTap: () => context.pop(),
+        onTap: () => removeDialog(),
         child: Container(
           height: double.infinity,
           width: double.infinity,
@@ -47,9 +50,7 @@ class InviteDialogBox extends StatelessWidget {
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () {
-                          context.pop();
-                        },
+                        onTap: () => removeDialog(),
                         child: const Icon(
                           Icons.cancel_outlined,
                           color: AppColor.white,

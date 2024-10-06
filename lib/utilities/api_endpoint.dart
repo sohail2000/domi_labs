@@ -1,10 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:latlong2/latlong.dart';
 
 class ApiEndpoint {
-  static const String osmEndpoint =
-      'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  static final String osmEndpoint =
+  "https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=${dotenv.env['OSM_API_KEY']}";
 
-      
   static String getBuildingOutlineUrl(LatLng latLng) {
     return '''https://overpass-api.de/api/interpreter?data=[out:json];
   (

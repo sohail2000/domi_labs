@@ -32,12 +32,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <!--Google maps starts-->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC32uvja8hok5Yn4MqwMRkVQokOYLz8I2M"
-            />
-        <!--Google maps ends-->
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and
