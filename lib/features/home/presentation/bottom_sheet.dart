@@ -1,6 +1,7 @@
 import 'package:domi_labs/features/home/presentation/pdf_list_item.dart';
 import 'package:domi_labs/styling/app_colors.dart';
 import 'package:domi_labs/styling/app_text_styles.dart';
+import 'package:domi_labs/utilities/pdf_data.dart';
 import 'package:flutter/material.dart';
 
 class MapBottomSheet extends StatelessWidget {
@@ -17,7 +18,6 @@ class MapBottomSheet extends StatelessWidget {
           controller: scrollController,
           physics: const ClampingScrollPhysics(),
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.8,
             padding: const EdgeInsets.only(top: 10),
             decoration: const BoxDecoration(
               color: Colors.black,
@@ -52,8 +52,8 @@ class MapBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'domi in',
-                              style: AppTextStyle.whiteRegular12,
+                              'dõmi in',
+                              style: AppTextStyle.whiteBold16,
                             ),
                             Icon(Icons.arrow_forward_ios_rounded,
                                 size: 10, color: Colors.white),
@@ -104,8 +104,8 @@ class MapBottomSheet extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'domi docs',
-                              style: AppTextStyle.whiteRegular12,
+                              'dõmi docs',
+                              style: AppTextStyle.whiteBold16,
                             ),
                             Icon(Icons.arrow_forward_ios_rounded,
                                 size: 10, color: Colors.white),
@@ -113,29 +113,29 @@ class MapBottomSheet extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         TextField(
+                          style: AppTextStyle.whiteRegular12,
                           decoration: InputDecoration(
                             prefixIcon:
                                 const Icon(Icons.search, color: Colors.white70),
                             hintText: 'Search docs',
-                            hintStyle: const TextStyle(color: Colors.white70),
+                            hintStyle: AppTextStyle.whiteMedium16
+                                .copyWith(color: Colors.white70),
                             filled: true,
                             fillColor: Colors.grey[800],
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(40),
                               borderSide: BorderSide.none,
                             ),
                           ),
                         ),
-                        // const SizedBox(height: 10),
                         ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: pdfFiles.length,
+                          itemCount: pdfFileList.length,
                           itemBuilder: (context, index) {
-                            final pdf = pdfFiles[index];
+                            final pdf = pdfFileList[index];
                             return PDFListItem(
-                              fileName: pdf['name']!,
-                              openedDate: pdf['date']!,
+                              pdfData: pdf
                             );
                           },
                         ),
@@ -152,45 +152,3 @@ class MapBottomSheet extends StatelessWidget {
   }
 }
 
-final List<Map<String, String>> pdfFiles = [
-  {
-    "name": "100 Martinique Ave Title",
-    "date": "Dec 4, 2023",
-    "file": 'assets/pdfs/dummy01.pdf'
-  },
-  {
-    "name": "Chase Bank Statement - November 2023",
-    "date": "Dec 3, 2023",
-    "file": 'assets/pdfs/dummy02.pdf'
-  },
-  {
-    "name": "Utility Bill - October 2023",
-    "date": "Nov 15, 2023",
-    "file": 'assets/pdfs/dummy01.pdf'
-  },
-  {
-    "name": "Insurance Policy 2023",
-    "date": "Nov 2, 2023",
-    "file": 'assets/pdfs/dummy02.pdf'
-  },
-  {
-    "name": "Car Loan Agreement",
-    "date": "Oct 22, 2023",
-    "file": 'assets/pdfs/dummy01.pdf'
-  },
-  {
-    "name": "Investment Portfolio - Q3 2023",
-    "date": "Oct 10, 2023",
-    "file": 'assets/pdfs/dummy02.pdf'
-  },
-  {
-    "name": "Tax Filing - 2023",
-    "date": "Sep 28, 2023",
-    "file": 'assets/pdfs/dummy01.pdf'
-  },
-  {
-    "name": "House Lease Contract",
-    "date": "Sep 15, 2023",
-    "file": 'assets/pdfs/dummy02.pdf'
-  },
-];

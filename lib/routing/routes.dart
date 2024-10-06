@@ -1,9 +1,11 @@
-import 'package:domi_labs/features/home/presentation/map_screen.dart';
+import 'package:domi_labs/features/home/presentation/map_screen_osm.dart';
+import 'package:domi_labs/features/home/presentation/pdf_preview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoutes {
   static const home = '/';
+  static const pdfView = '/pdf_view';
 }
 
 class AppRoutingUtils {
@@ -18,10 +20,21 @@ class AppRoutingUtils {
               GoRouterState state,
             ) =>
                 const NoTransitionPage(
-              child: MapScreen(),
+              child: MapScreenOsm(),
             ),
           ),
-          
+          GoRoute(
+            path: AppRoutes.pdfView,
+            pageBuilder: (
+              BuildContext context,
+              GoRouterState state,
+            ) =>
+                NoTransitionPage(
+              child: PdfView(
+                url: state.extra as String,
+              ),
+            ),
+          ),
         ],
       );
 }
