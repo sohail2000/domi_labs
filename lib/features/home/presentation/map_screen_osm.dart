@@ -47,13 +47,12 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
   }
 
   Future<void> _handleTap(LatLng latLng) async {
-
     List<LatLng> buildingPolygon = await ref
         .read(mapScreenControllerProvider.notifier)
         .bulidingOutline(latLng);
     if (buildingPolygon.isNotEmpty) {
       _polygons.clear();
-      _selectedLocationMarker =  null;
+      _selectedLocationMarker = null;
       _polygons.add(
         Polygon(
           points: buildingPolygon,
@@ -74,6 +73,8 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
       },
     ).then((value) {
       _isInviteDialogOpen = false;
+      _polygons.clear();
+      _selectedLocationMarker = null;
       setState(() {});
     });
 
@@ -112,7 +113,7 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
                 address:
                     _currentAddress.isEmpty ? "Loading..." : _currentAddress),
           ),
-          if(!_isInviteDialogOpen) const MapBottomSheet()
+          if (!_isInviteDialogOpen) const MapBottomSheet()
         ],
       ),
     );

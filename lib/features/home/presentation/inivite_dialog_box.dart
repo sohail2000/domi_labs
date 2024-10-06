@@ -28,7 +28,6 @@ class InviteDialogBox extends StatelessWidget {
                       style: AppTextStyle.whiteBold16,
                     ),
                     const Spacer(),
-                    // Image.asset( "assets/icons/cancel_icon.png", width: 40,height:40,)
                     GestureDetector(
                       onTap: () {
                         context.pop();
@@ -57,12 +56,9 @@ class InviteDialogBox extends StatelessWidget {
                           backgroundColor: AppColor.white,
                           foregroundColor: Colors.white),
                       onPressed: () async {
-                        final result = await Share.share(
-                            'check out my website https://pub.dev/packages/share_plus');
-
-                        if (result.status == ShareResultStatus.success) {
-                          print('Thank you for sharing my website!');
-                        }
+                        await Share.share(
+                          "Invite your neighbor and you both recives \$10 when they claim their address.",
+                        );
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 16),
