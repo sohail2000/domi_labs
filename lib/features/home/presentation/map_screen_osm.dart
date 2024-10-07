@@ -27,7 +27,7 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
   Marker? _selectedLocationMarker;
   bool _showInviteDialog = false;
   bool _loadingUserLocation = false;
-  bool _loadingTapedLocation = false;
+  bool _loadingSelectLocation = false;
 
   late final MapController _mapController;
 
@@ -63,7 +63,7 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
     if (_showInviteDialog) return;
 
     setState(() {
-      _loadingTapedLocation = true;
+      _loadingSelectLocation = true;
     });
 
     //get selected location addresss
@@ -91,7 +91,7 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
       // Show marker if building outline is not received from Overpass API
       _selectedLocationMarker = selectedLocationMarker(latLng);
     }
-    _loadingTapedLocation = false;
+    _loadingSelectLocation = false;
     _showInviteDialog = true;
     setState(() {});
   }
@@ -130,7 +130,7 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
               ]),
             ],
           ),
-          if (_loadingTapedLocation || _loadingUserLocation)
+          if (_loadingSelectLocation || _loadingUserLocation)
             const Align(
               alignment: Alignment.topCenter,
               child: ContinuousLinearLoadingBar(),

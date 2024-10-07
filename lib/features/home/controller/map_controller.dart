@@ -24,10 +24,11 @@ class MapScreenController extends _$MapScreenController {
 
   Future<LatLng?> userLocation() async {
     LatLng? location;
-    AsyncValue.guard(
+    await AsyncValue.guard(
       () async {
         LocationService locationService = ref.read(locationServiceProvider);
         location = await locationService.userLocation();
+        
       },
     );
     return location;
