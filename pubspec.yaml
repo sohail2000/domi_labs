@@ -53,6 +53,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^27.1.51
   share_plus: ^10.0.2
   flutter_dotenv: ^5.1.0
+  fluttertoast: ^8.2.8
   
 
 dev_dependencies:

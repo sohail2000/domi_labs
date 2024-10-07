@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:domi_labs/common_widgets/components/loading_bar.dart';
 import 'package:domi_labs/features/home/controller/map_controller.dart';
 import 'package:domi_labs/features/home/presentation/map_bottom_sheet.dart';
 import 'package:domi_labs/styling/app_colors.dart';
@@ -22,9 +23,11 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
   final List<Polygon> _polygons = [];
   LatLng? _currentLocation;
   String _currentAddress = "";
-  String _inviteAddress = "";
+  String _selectedLocationAddress = "";
   Marker? _selectedLocationMarker;
   bool _showInviteDialog = false;
+  bool _loadingUserLocation = false;
+  bool _loadingTapedLocation = false;
 
   late final MapController _mapController;
 
@@ -36,23 +39,35 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
   }
 
   Future<void> _getCurrentLocation() async {
-    LatLng userLocation =
-        await ref.read(mapScreenControllerProvider.notifier).userLocation();
-    String address = await ref
-        .read(mapScreenControllerProvider.notifier)
-        .addressFromLatlong(userLocation);
     setState(() {
-      _currentLocation = userLocation;
-      _currentAddress = address;
+      _loadingUserLocation = true;
     });
-    _mapController.move(userLocation, 17);
+    LatLng? userLocation =
+        await ref.read(mapScreenControllerProvider.notifier).userLocation();
+    if (userLocation != null) {
+      String address = await ref
+          .read(mapScreenControllerProvider.notifier)
+          .addressFromLatlong(userLocation);
+      setState(() {
+        _currentLocation = userLocation;
+        _currentAddress = address;
+      });
+      _mapController.move(userLocation, 17);
+    }
+    setState(() {
+      _loadingUserLocation = false;
+    });
   }
 
   Future<void> _handleTap(LatLng latLng) async {
     if (_showInviteDialog) return;
 
+    setState(() {
+      _loadingTapedLocation = true;
+    });
+
     //get selected location addresss
-    final _inviteAddress = await ref
+    _selectedLocationAddress = await ref
         .read(mapScreenControllerProvider.notifier)
         .addressFromLatlong(latLng);
 
@@ -76,7 +91,7 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
       // Show marker if building outline is not received from Overpass API
       _selectedLocationMarker = selectedLocationMarker(latLng);
     }
-
+    _loadingTapedLocation = false;
     _showInviteDialog = true;
     setState(() {});
   }
@@ -115,6 +130,11 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
               ]),
             ],
           ),
+          if (_loadingTapedLocation || _loadingUserLocation)
+            const Align(
+              alignment: Alignment.topCenter,
+              child: ContinuousLinearLoadingBar(),
+            ),
           Align(
             alignment: Alignment.topCenter,
             child: MapTopBar(
@@ -123,9 +143,9 @@ class _MapScreenOsmState extends ConsumerState<MapScreenOsm> {
           ),
           _showInviteDialog
               ? InviteDialogBox(
-                inviteAddress: _inviteAddress,
-                removeDialog: () => removeInviteDialog(),
-              )
+                  inviteAddress: _selectedLocationAddress,
+                  removeDialog: () => removeInviteDialog(),
+                )
               : const MapBottomSheet(),
         ],
       ),
